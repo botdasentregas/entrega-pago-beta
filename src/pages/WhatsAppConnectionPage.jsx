@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
@@ -58,6 +59,7 @@ const WhatsAppConnectionPage = () => {
         
         // Adicionar redirecionamento para o dashboard do assistente após 1.5 segundos
         setTimeout(() => {
+          console.log("Navigating to dashboard...");
           navigate('/assistant-dashboard');
         }, 1500);
       }, 10000); // Simula 10 segundos para escanear o QR
