@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -19,6 +18,7 @@ const WhatsAppConnectionPage = () => {
   const [loading, setLoading] = useState(false);
   const [qrCodeVisible, setQrCodeVisible] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const startSession = () => {
     setLoading(true);
@@ -55,11 +55,16 @@ const WhatsAppConnectionPage = () => {
           description: "Seu assistente de entregas está pronto para uso.",
           variant: "default",
         });
+        
+        // Adicionar redirecionamento para o dashboard do assistente após 1.5 segundos
+        setTimeout(() => {
+          navigate('/assistant-dashboard');
+        }, 1500);
       }, 10000); // Simula 10 segundos para escanear o QR
 
       return () => clearTimeout(timer);
     }
-  }, [qrCodeVisible, toast]);
+  }, [qrCodeVisible, toast, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#EFF1F7] p-4">
