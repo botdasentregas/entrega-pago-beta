@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -20,6 +19,8 @@ import {
 } from "lucide-react";
 
 const AssistantDashboard = () => {
+  console.log("AssistantDashboard component rendered");
+  
   const [assistantActive, setAssistantActive] = useState(false);
   const [conversations, setConversations] = useState([
     { id: 1, name: "João Silva", active: true },

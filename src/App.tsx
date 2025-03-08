@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import PaymentPage from "./pages/PaymentPage";
 import LoginPage from "./pages/LoginPage";
 import WhatsAppConnectionPage from "./pages/WhatsAppConnectionPage";
+import AssistantDashboard from "./pages/AssistantDashboard";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/connect-whatsapp" element={<WhatsAppConnectionPage />} />
+          <Route path="/assistant-dashboard" element={<AssistantDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
