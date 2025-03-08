@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PaymentPage from "./pages/PaymentPage";
 import LoginPage from "./pages/LoginPage";
+import WhatsAppConnectionPage from "./pages/WhatsAppConnectionPage";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/connect-whatsapp" element={<WhatsAppConnectionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

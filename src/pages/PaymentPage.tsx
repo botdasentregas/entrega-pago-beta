@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,9 @@ import { useToast } from "@/hooks/use-toast";
 const PaymentPage = () => {
   const [referralCode, setReferralCode] = useState("");
   const [hasDiscount, setHasDiscount] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const normalPrice = 79.97;
   const betaPrice = 50;
@@ -41,8 +43,28 @@ const PaymentPage = () => {
   };
 
   const handlePayment = () => {
-    // Aqui seria a integração com Mercado Pago
-    window.location.href = "https://www.mercadopago.com.br/checkout"; // URL fictícia para exemplo
+    // Simulando processamento de pagamento
+    setProcessing(true);
+    toast({
+      title: "Processando pagamento",
+      description: "Aguarde enquanto processamos seu pagamento.",
+      variant: "default",
+    });
+    
+    // Simulação de processamento
+    setTimeout(() => {
+      setProcessing(false);
+      toast({
+        title: "Pagamento aprovado!",
+        description: "Redirecionando para configuração do WhatsApp...",
+        variant: "default",
+      });
+      
+      // Redirecionando para a página de conexão do WhatsApp
+      setTimeout(() => {
+        navigate("/connect-whatsapp");
+      }, 1500);
+    }, 3000);
   };
 
   return (
@@ -112,12 +134,12 @@ const PaymentPage = () => {
                   value={referralCode}
                   onChange={(e) => setReferralCode(e.target.value)}
                   className="border-gray-300"
-                  disabled={hasDiscount}
+                  disabled={hasDiscount || processing}
                 />
                 <Button 
                   onClick={handleApplyCode} 
                   variant="outline"
-                  disabled={hasDiscount || referralCode.trim() === ""}
+                  disabled={hasDiscount || referralCode.trim() === "" || processing}
                 >
                   Aplicar
                 </Button>
@@ -134,13 +156,20 @@ const PaymentPage = () => {
               <Button 
                 onClick={handlePayment} 
                 className="w-full py-6 bg-[#0A1128] hover:bg-[#1A2942] text-white font-medium flex items-center justify-center"
+                disabled={processing}
               >
                 <CreditCard className="h-5 w-5 mr-2" />
-                Pagar com Mercado Pago
+                {processing ? (
+                  <>
+                    <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                    Processando...
+                  </>
+                ) : "Pagar com Mercado Pago"}
               </Button>
               
               <p className="text-xs text-gray-500 text-center">
                 Ao clicar em "Pagar", você será redirecionado para o checkout seguro do Mercado Pago.
+                Após o pagamento, você poderá conectar o assistente ao WhatsApp.
               </p>
             </div>
           </div>
